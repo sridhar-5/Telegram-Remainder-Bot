@@ -22,7 +22,7 @@ async function Bot() {
     var Name = ctx.message.text;
     if (Name.length != 0) {
       ctx.reply("When do you want to me to schedule ?", calendar.getCalendar());
-      calendar.setDateListener((context, date) => context.reply(date));
+      calendar.setDateListener((context, date) => console.log(date));
     }
   });
 }
