@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { bot, UrlBase } = require("./bot");
+const { bot, UrlBase, Bot } = require("./bot");
 
 app.get("/", (request, response) => {
   response.send("Bot is running");

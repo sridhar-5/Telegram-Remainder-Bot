@@ -23,10 +23,12 @@
   },
   "homepage": "https://github.com/sridhar-5/Telegram-Remainder-Bot#readme",
   "dependencies": {
+    "axios": "^0.24.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.13",
-    "telegraf": "^4.4.2"
+    "telegraf": "^4.4.2",
+    "telegraf-calendar-telegram": "^1.5.8"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
