@@ -1,12 +1,31 @@
 const { Telegraf } = require("telegraf");
 const axios = require("axios");
-const Calender = require("telegraf-calendar-telegram");
+const Calender = require("./calender-helper/calenderClass");
 
 require("dotenv").config();
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 
-const calendar = new Calendar(bot);
+const calendar = new Calender(bot, {
+  startWeekDay: 0,
+  weekDayNames: ["S", "M", "T", "W", "T", "F", "S"],
+  monthNames: [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ],
+  minDate: null,
+  maxDate: null,
+});
 
 const UrlBase =
   process.env.NODE_ENV === "development"
