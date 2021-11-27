@@ -6,6 +6,7 @@ require("dotenv").config();
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 
 const calendar = new Calendar(bot);
+console.log(calendar.getCalendar());
 
 const UrlBase =
   process.env.NODE_ENV === "development"
@@ -19,7 +20,7 @@ async function Bot() {
     ctx.reply("Heyya..! Back again..What do you want to schedule ? ");
 
     var Name = ctx.message.text;
-    ctx.reply("When do you want to me to schedule ?", calendar.getCalender());
+    ctx.reply("When do you want to me to schedule ?", calendar.getCalendar());
     calendar.setDateListener((context, date) => context.reply(date));
   });
 }
