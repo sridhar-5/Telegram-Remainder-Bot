@@ -5,8 +5,8 @@ require("dotenv").config();
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 
-const calendar = new Calendar(bot);
-console.log(calendar.getCalendar());
+// const calendar = new Calendar(bot);
+// console.log(calendar.getCalendar());
 
 // const UrlBase =
 //   process.env.NODE_ENV == "development"
@@ -37,6 +37,44 @@ async function Bot() {
         calendar.setDateListener((context, date) => context.reply(date));
       }
     });
+  });
+
+  const calendar = new Calendar(bot, {
+    startWeekDay: 0,
+    weekDayNames: ["S", "M", "T", "W", "T", "F", "S"],
+    monthNames: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    minDate: null,
+    maxDate: null,
+  });
+
+  // listen for the selected date event
+  calendar.setDateListener((context, date) => context.reply(date));
+  // retreive the calendar HTML
+  bot.command("calendar", (context) => {
+    const today = new Date();
+    const minDate = new Date();
+    minDate.setMonth(today.getMonth() - 2);
+    const maxDate = new Date();
+    maxDate.setMonth(today.getMonth() + 2);
+    maxDate.setDate(today.getDate());
+
+    context.reply(
+      "Here you are",
+      calendar.setMinDate(minDate).setMaxDate(maxDate).getCalendar()
+    );
   });
 }
 
