@@ -28,13 +28,15 @@ async function Bot() {
         console.log(ctx.message);
       }
       if (task.length > 0) {
-        ctx.reply(`Okayyy..! I will sure make a note about ${task}`);
+        ctx.reply(
+          `Okayyy..${ctx.chat.username}! I will sure make a note about ${task}`
+        );
 
         // listen for the selected date event
         calendar.setDateListener((context, date) => context.reply(date));
 
         // retreive the calendar HTML
-        context.reply("When is this task due ?", calendar.getCalendar());
+        ctx.reply("When is this task due ?", calendar.getCalendar());
       }
     });
   });
