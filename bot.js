@@ -28,8 +28,8 @@ async function Bot() {
 
       if (process.env.NODE_ENV === "development") {
         console.log(ctx.message);
-        ctx.reply(`Ok ${ctx.state.role}! I will remind you about ${task}`);
       }
+      ctx.reply(`Ok ${ctx.state.role}! I will remind you about ${task}`);
     });
   });
 }
