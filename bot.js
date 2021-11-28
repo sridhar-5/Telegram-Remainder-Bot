@@ -19,11 +19,17 @@ async function Bot() {
 
   //create the task
   bot.command("create", (ctx) => {
-    ctx.reply("Heyya..! Back again..What do you want to schedule ? ");
+    ctx.reply(
+      `Heyya ${ctx.message.from.id}! Back again..What do you want to schedule ? `
+    );
 
-    if (process.env.NODE_ENV === "development") {
-      console.log(ctx.message);
-    }
+    bot.on("text", (ctx) => {
+      if (process.env.NODE_ENV === "development") {
+        console.log(ctx.message);
+      }
+      const task = ctx.message.text;
+      ctx.reply(`Ok ${ctx.message.from.id}! I will remind you about ${task}`);
+    });
   });
 }
 
