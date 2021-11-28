@@ -5,21 +5,13 @@ require("dotenv").config();
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 
-const calendar = new Calendar(bot, {
-	startWeekDay: 0,
-	weekDayNames: ["S", "M", "T", "W", "T", "F", "S"],
-	monthNames: [
-		"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-	],
-	minDate: null,
-	maxDate: null
-});
+const calendar = new Calendar(bot);
+console.log(calendar.getCalendar());
 
-const UrlBase =
-  process.env.NODE_ENV === "development"
-    ? "https://localhost:5000"
-    : "https://events-buddy-bot.herokuapp.com";
+// const UrlBase =
+//   process.env.NODE_ENV == "development"
+//     ? "https://localhost:5000"
+//     : "https://events-buddy-bot.herokuapp.com";
 
 async function Bot() {
   bot.start((ctx) => ctx.reply("Welcome!"));
@@ -42,10 +34,7 @@ async function Bot() {
         calendar.setDateListener((context, date) => context.reply(date));
 
         // retreive the calendar HTML
-        context.reply(
-          "When is this task due ?",
-          calendar.getCalendar();
-        );
+        context.reply("When is this task due ?", calendar.getCalendar());
       }
     });
   });
@@ -54,4 +43,4 @@ async function Bot() {
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
 
-module.exports = { bot, UrlBase, Bot };
+module.exports = { bot, Bot };

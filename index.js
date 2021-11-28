@@ -1,10 +1,9 @@
 const express = require("express");
 const app = express();
 const ConnectDB = require("./config/connectDatabase");
-
 require("dotenv").config();
 
-const { bot, UrlBase, Bot } = require("./bot");
+const { bot, Bot } = require("./bot");
 
 app.use(express.json());
 
@@ -20,7 +19,6 @@ bot.launch();
 Bot();
 
 const PORT = process.env.PORT || 3000;
-
 //listening
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

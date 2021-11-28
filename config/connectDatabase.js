@@ -8,9 +8,7 @@ function ConnectDatabase() {
     `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.9qggj.mongodb.net/${process.env.DATABASE_NAME}?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
-      useFindAndModify: false,
       useUnifiedTopology: true,
-      useCreateIndex: true,
     }
   );
 
