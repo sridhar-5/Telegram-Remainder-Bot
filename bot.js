@@ -24,11 +24,12 @@ async function Bot() {
     );
 
     bot.on("text", (ctx) => {
+      const task = ctx.message.text;
+
       if (process.env.NODE_ENV === "development") {
         console.log(ctx.message);
+        ctx.reply(`Ok ${ctx.state.role}! I will remind you about ${task}`);
       }
-      const task = ctx.message.text;
-      ctx.reply(`Ok ${ctx.message.from.id}! I will remind you about ${task}`);
     });
   });
 }
