@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "devMode": "nodemon index.js"
+    "devMode": "NODE_ENV=development nodemon index.js"
   },
   "repository": {
     "type": "git",

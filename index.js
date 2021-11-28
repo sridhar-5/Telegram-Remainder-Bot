@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+require("dotenv").config();
+
 const { bot, UrlBase, Bot } = require("./bot");
 
 app.get("/", (request, response) => {
@@ -9,8 +11,8 @@ app.get("/", (request, response) => {
 bot.launch();
 Bot();
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, "127.0.0.1", () => {
-  console.log(`server is running on port ${PORT}`);
+const PORT = process.env.PORT || 3000;
+//listening
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
