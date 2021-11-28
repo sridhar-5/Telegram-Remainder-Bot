@@ -5,7 +5,16 @@ require("dotenv").config();
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 
-const calendar = new Calendar(bot);
+const calendar = new Calendar(bot, {
+	startWeekDay: 0,
+	weekDayNames: ["S", "M", "T", "W", "T", "F", "S"],
+	monthNames: [
+		"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+	],
+	minDate: null,
+	maxDate: null
+});
 
 const UrlBase =
   process.env.NODE_ENV === "development"
@@ -27,22 +36,15 @@ async function Bot() {
         console.log(ctx.message);
       }
       if (task.length > 0) {
-        ctx.reply(`Okayyy..! I will sure remind you about ${task}`);
+        ctx.reply(`Okayyy..! I will sure make a note about ${task}`);
 
         // listen for the selected date event
         calendar.setDateListener((context, date) => context.reply(date));
 
         // retreive the calendar HTML
-        const today = new Date();
-        const minDate = new Date();
-        minDate.setMonth(today.getMonth() - 2);
-        const maxDate = new Date();
-        maxDate.setMonth(today.getMonth() + 2);
-        maxDate.setDate(today.getDate());
-
         context.reply(
           "When is this task due ?",
-          calendar.setMinDate(minDate).setMaxDate(maxDate).getCalendar()
+          calendar.getCalendar();
         );
       }
     });
