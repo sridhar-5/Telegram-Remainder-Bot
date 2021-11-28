@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/37872dcf-9d40-4642-b85f-d409d1658686/resourceGroups/Telegram-bots/providers/Microsoft.Web/sites/Eventbuddy-telegram-bot",
+  "appService.deploySubpath": "."
+}

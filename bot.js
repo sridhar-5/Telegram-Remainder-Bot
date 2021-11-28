@@ -47,7 +47,7 @@ async function Bot() {
         );
 
         ctx.replyWithMarkdown(
-          "Almost there..! To pick a date reply with `/calendar`"
+          "Almost there..! To pick a date reply with <br /> `/calendar`"
         );
       }
     });
