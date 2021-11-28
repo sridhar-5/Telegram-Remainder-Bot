@@ -10,19 +10,19 @@ console.log(calendar.getCalendar());
 
 const UrlBase =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:3000"
+    ? "https://localhost:5000"
     : "https://events-buddy-bot.herokuapp.com";
 
 async function Bot() {
   bot.start((ctx) => ctx.reply("Welcome!"));
   bot.help((ctx) => ctx.reply("Schedule an event..!"));
-  bot.command("Create", (ctx) => {
+
+  //create the task
+  bot.command("create", (ctx) => {
     ctx.reply("Heyya..! Back again..What do you want to schedule ? ");
 
-    var Name = ctx.message.text;
-    if (Name.length != 0) {
-      ctx.reply("When do you want to me to schedule ?", calendar.getCalendar());
-      calendar.setDateListener((context, date) => console.log(date));
+    if (process.env.NODE_ENV === "development") {
+      console.log(ctx.message);
     }
   });
 }
