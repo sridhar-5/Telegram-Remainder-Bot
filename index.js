@@ -13,8 +13,6 @@ app.get("/", (request, response) => {
 
 //Establishing the connection to MongoDb Bot
 ConnectDB();
-//Launching the bot
-bot.launch();
 // Invoking the Start Bot function
 Bot();
 
