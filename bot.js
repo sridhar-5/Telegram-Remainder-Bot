@@ -64,7 +64,17 @@ async function Bot() {
   calendar.setDateListener((context, date) => context.reply(date));
   // retreive the calendar HTML
   bot.command("calendar", (context) => {
-    context.reply("Here you are", calendar.getCalendar());
+    const today = new Date();
+    const minDate = new Date();
+    minDate.setMonth(today.getMonth() - 6);
+    const maxDate = new Date();
+    maxDate.setMonth(today.getMonth() + 6);
+    maxDate.setDate(today.getDate());
+
+    context.reply(
+      "Here you are",
+      calendar.setMinDate(minDate).setMaxDate(maxDate).getCalendar()
+    );
   });
 }
 
