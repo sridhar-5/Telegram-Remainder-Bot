@@ -6,13 +6,26 @@ const SelectDateFromCalendar = require("./calendar/calendarFunction");
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 
-// const calendar = new Calendar(bot);
-// console.log(calendar.getCalendar());
-
-// const UrlBase =
-//   process.env.NODE_ENV == "development"
-//     ? "https://localhost:5000"
-//     : "https://events-buddy-bot.herokuapp.com";
+const calendar = new Calendar(bot, {
+  startWeekDay: 0,
+  weekDayNames: ["S", "M", "T", "W", "T", "F", "S"],
+  monthNames: [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ],
+  minDate: null,
+  maxDate: null,
+});
 
 async function Bot() {
   bot.start((ctx) => ctx.reply("Welcome!"));
@@ -38,44 +51,23 @@ async function Bot() {
         );
       }
     });
+  });
 
-    const calendar = new Calendar(bot, {
-      startWeekDay: 0,
-      weekDayNames: ["S", "M", "T", "W", "T", "F", "S"],
-      monthNames: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
-      minDate: null,
-      maxDate: null,
-    });
+  // listen for the selected date event
+  calendar.setDateListener((context, date) => context.reply(date));
+  // retreive the calendar HTML
+  bot.command("calendar", (context) => {
+    const today = new Date();
+    const minDate = new Date();
+    minDate.setMonth(today.getMonth() - 6);
+    const maxDate = new Date();
+    maxDate.setMonth(today.getMonth() + 6);
+    maxDate.setDate(today.getDate());
 
-    // listen for the selected date event
-    calendar.setDateListener((context, date) => context.reply(date));
-    // retreive the calendar HTML
-    bot.command("calendar", (context) => {
-      const today = new Date();
-      const minDate = new Date();
-      minDate.setMonth(today.getMonth() - 6);
-      const maxDate = new Date();
-      maxDate.setMonth(today.getMonth() + 6);
-      maxDate.setDate(today.getDate());
-
-      context.reply(
-        "There you go..! Pick a Date",
-        calendar.setMinDate(minDate).setMaxDate(maxDate).getCalendar()
-      );
-    });
+    context.reply(
+      "There you go..! Pick a Date",
+      calendar.setMinDate(minDate).setMaxDate(maxDate).getCalendar()
+    );
   });
 
   process.once("SIGINT", () => bot.stop("SIGINT"));
