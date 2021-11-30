@@ -60,7 +60,7 @@ async function Bot() {
   calendar.setDateListener((context, date) => {
     ScheduleDate = date;
     context.replyWithMarkdown(`Selected date is ${date}`);
-    context.reply("Donezo..! To set the time reply with `/time`");
+    context.reply("Donezo..! To set the time reply with `/picktime`");
   });
 
   // retreive the calendar HTML
@@ -95,7 +95,7 @@ async function Bot() {
       Key.callback(currentMinutes, "Noaction"),
       Key.callback(currentMeridium, "Noaction"),
       Key.callback(Buttons[1], "DecHours"),
-      Key.callback(Buttons[1], "DecMinut"),
+      Key.callback(Buttons[1], "DecMinutes"),
       Key.callback(Buttons[1], "AMPM"),
       Key.callback("Okay", "Proceed"),
     ],
@@ -147,7 +147,7 @@ async function Bot() {
         Key.callback(currentMinutes, "Noaction"),
         Key.callback(currentMeridium, "Noaction"),
         Key.callback(Buttons[1], "DecHours"),
-        Key.callback(Buttons[1], "DecMinut"),
+        Key.callback(Buttons[1], "DecMinutes"),
         Key.callback(Buttons[1], "AMPM"),
         Key.callback("Okay", "Proceed"),
       ],
@@ -172,7 +172,7 @@ async function Bot() {
         Key.callback(currentMinutes, "Noaction"),
         Key.callback(currentMeridium, "Noaction"),
         Key.callback(Buttons[1], "DecHours"),
-        Key.callback(Buttons[1], "DecMinut"),
+        Key.callback(Buttons[1], "DecMinutes"),
         Key.callback(Buttons[1], "AMPM"),
         Key.callback("Okay", "Proceed"),
       ],
@@ -197,7 +197,7 @@ async function Bot() {
         Key.callback(currentMinutes, "Noaction"),
         Key.callback(currentMeridium, "Noaction"),
         Key.callback(Buttons[1], "DecHours"),
-        Key.callback(Buttons[1], "DecMinut"),
+        Key.callback(Buttons[1], "DecMinutes"),
         Key.callback(Buttons[1], "AMPM"),
         Key.callback("Okay", "Proceed"),
       ],
@@ -226,7 +226,7 @@ async function Bot() {
         Key.callback(currentMinutes, "Noaction"),
         Key.callback(currentMeridium, "Noaction"),
         Key.callback(Buttons[1], "DecHours"),
-        Key.callback(Buttons[1], "DecMinut"),
+        Key.callback(Buttons[1], "DecMinutes"),
         Key.callback(Buttons[1], "AMPM"),
         Key.callback("Okay", "Proceed"),
       ],
@@ -242,7 +242,7 @@ async function Bot() {
     console.log(ctx.callbackQuery.message);
     ctx.editMessageText(time);
     ctx.reply(
-      `Donezo..! \n Task scheduled on: ${ScheduleDate} \n Scheduled at: ${time}..!`
+      `Donezo..! \nTask scheduled on: ${ScheduleDate} \nScheduled at: ${time}..!`
     );
   });
 
