@@ -4,7 +4,6 @@ const axios = require("axios");
 const Calendar = require("telegraf-calendar-telegram");
 const SaveToTheDatabase = require("./config/DatabaseFunctions");
 require("dotenv").config();
-const SelectDateFromCalendar = require("./calendar/calendarFunction");
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 

@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 const ConnectDB = require("./config/connectDatabase");
+const remainders = require("./routes/DaywiseRemainders");
 require("dotenv").config();
 
 const { bot, Bot } = require("./bot");
 
 app.use(express.json());
+app.use("/bot/reminder/upcoming", remainders);
 
 app.get("/", (request, response) => {
   response.send("Bot is running");
