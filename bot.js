@@ -30,7 +30,7 @@ const calendar = new Calendar(bot, {
 });
 
 async function Bot() {
-  const task = "";
+  var task = "";
   bot.start((ctx) => ctx.reply("Welcome!"));
   bot.help((ctx) => ctx.reply("Schedule an event..!"));
 
