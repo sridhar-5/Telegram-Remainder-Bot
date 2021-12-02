@@ -2,6 +2,7 @@ const { Telegraf } = require("telegraf");
 const { Keyboard, Key } = require("telegram-keyboard");
 const axios = require("axios");
 const Calendar = require("telegraf-calendar-telegram");
+const SaveToTheDatabase = require('./config/DatabaseFunctions');
 require("dotenv").config();
 const SelectDateFromCalendar = require("./calendar/calendarFunction");
 
@@ -29,6 +30,7 @@ const calendar = new Calendar(bot, {
 });
 
 async function Bot() {
+  const task;
   bot.start((ctx) => ctx.reply("Welcome!"));
   bot.help((ctx) => ctx.reply("Schedule an event..!"));
 
@@ -37,7 +39,7 @@ async function Bot() {
     ctx.reply(`Heyya..! Back again..What do you want to schedule ?`);
 
     bot.on("text", (ctx) => {
-      const task = ctx.message.text;
+      task = ctx.message.text;
 
       if (process.env.NODE_ENV === "development") {
         console.log(ctx.message);
@@ -244,6 +246,9 @@ async function Bot() {
     ctx.reply(
       `Donezo..! \nTask scheduled on: ${ScheduleDate} \nScheduled at: ${time}..!`
     );
+
+    SaveToTheDatabase(task, ScheduleDate, time);
+
   });
 
   bot.launch();
