@@ -3,6 +3,7 @@ const nodeCron = require("node-cron");
 const express = require("express");
 const router = express.Router();
 const Task = require("../models/tasks");
+const { bot, Bot } = require("../bot");
 const baseUrl = "http://eventbuddy-telegram-bot.azurewebsites.net";
 
 function MatchDateFormats(dateString) {
@@ -37,6 +38,13 @@ router.get("/", async (request, response) => {
     (task) => task.ScheduleDate.toString().slice(4, 15) == Today
   );
 
+  var i = 1;
+  bot.telegram.sendMessage(`I got you tasks Due Today.`);
+  filteredTasks.forEach((task) => {
+    bot.telegram.sendMessage(
+      `Task ${i}\nTask Name: ${task.taskName}\nDue Time: ${task.time}`
+    );
+  });
   response.send(filteredTasks);
 });
 

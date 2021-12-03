@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const Task = require("../models/tasks");
 
-async function SaveToTheDatabase(task, ScheduleDate, time) {
+async function SaveToTheDatabase(taskName, ScheduleDate, time) {
   const taskData = new Task({
-    task: task,
+    taskName: task,
     ScheduleDate: ScheduleDate,
     time: time,
   });
