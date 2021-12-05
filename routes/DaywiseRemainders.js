@@ -48,9 +48,11 @@ router.get("/", async (request, response) => {
   response.send(filteredTasks);
 });
 
-nodeCron.schedule("0 1 * * *", async () => {
+nodeCron.schedule("*/0.5 * * * *", async () => {
   //pushes notification at 6:30am IST
   var endpoint = baseUrl + "/bot/reminder/upcoming";
+  console.log("called");
+  console.log(endpoint);
   await axios
     .get(endpoint)
     .then((res) => {
@@ -61,6 +63,7 @@ nodeCron.schedule("0 1 * * *", async () => {
     .catch((err) => {
       console.log(err);
     });
+  console.log("request made");
 });
 
 module.exports = router;
