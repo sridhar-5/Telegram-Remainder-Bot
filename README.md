@@ -1,3 +1,3 @@
 # Telegram-Remainder-Bot
 
-Will write something here soon..lol.
+Invite this bot to you group or channel: https://t.me/events_buddy_bot
